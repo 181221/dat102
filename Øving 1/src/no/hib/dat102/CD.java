@@ -1,6 +1,12 @@
 package no.hib.dat102;
-/*
+/**
  * @author Peder Wiig Aalen
+ * 
+ * klasse for CD-en 
+ * Info om CDen CD-Nummer - Artist - Tittel - Aar - Sjanger -Plateselskap.
+ * Set og get 
+ * toString
+ * 
  */
 
 public class CD {

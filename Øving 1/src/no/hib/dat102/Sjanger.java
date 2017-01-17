@@ -1,4 +1,9 @@
 package no.hib.dat102;
+/**
+ * 
+ * Sjanger enum Rock - Pop - Opera - Classic.
+ *
+ */
 public enum Sjanger {
       ROCK(0), POP(1), OPERA(2), CLASSIC(3);
 	  

@@ -18,7 +18,7 @@ import no.hib.data102.adt.CDarkivADT;
  * 
  */
 public class Fil {
-	static final String SKILLE = "#";
+	private static final String SKILLE = "#";
 	
 
 	/**
@@ -26,7 +26,7 @@ public class Fil {
 	 * @return Referansen til CD-arkivet
 	 * @throws java.io.IOException
 	 */
-	public CDarkivADT lesFraFil(String filnavn) {
+	public static CDarkivADT lesFraFil(String filnavn) {
 
 		CDarkivADT cda = null;
 
@@ -52,9 +52,7 @@ public class Fil {
 				String artist = felt[1];
 				String tittel = felt[2];
 				int aar = Integer.parseInt(felt[3]);
-				int sjanger = Integer.parseInt(felt[4]); // Eventuelt lagret som heltall
-											// ...Må så konvertere til enum
-				Sjanger sj = Sjanger.finnSjanger(sjanger);
+				Sjanger sj = Sjanger.finnSjanger(felt[4]);
 				String plselskap = felt[5];
 				
 				CD cd = new CD(nr, artist, tittel, aar, sj, plselskap);
@@ -79,10 +77,10 @@ public class Fil {
 		return cda;
 	}
 
-	public void skrivTilFil(CDarkivADT cdarkiv, String filnavn, boolean utvid) {
+	public static void skrivTilFil(CDarkivADT cdarkiv, String filnavn) {
 		int antall = cdarkiv.hentAntall();
 		try {
-			FileWriter CDFil = new FileWriter(filnavn, false);
+			FileWriter CDFil = new FileWriter(filnavn);
 			PrintWriter utfil = new PrintWriter(CDFil);
 
 			utfil.println(antall);

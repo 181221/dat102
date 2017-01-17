@@ -1,40 +1,60 @@
 package no.hib.dat102;
 
 import java.util.*;
-
 import no.hib.data102.adt.CDarkivADT;
 
 public class Tekstgrensesnitt {
 	// lese opplysningene om en CD fra tastatur
 	public CD lesCD() {
 		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("CdNummer: ");
 		int cdNummer = sc.nextInt();
-		String artist = sc.nextLine();
-		String tittel = sc.nextLine();
+		
+		System.out.print("Artist: ");
+		String artist = sc.next();
+		
+		System.out.print("Tittel: ");
+		String tittel = sc.next();
+		
+		System.out.print("Aar: ");
 		int aar = sc.nextInt();
-		Sjanger sjanger = Sjanger.finnSjanger(sc.nextInt());
-		String plateselskap = sc.nextLine();
+		
+		System.out.print("Sjanger: ");
+		Sjanger sjanger = Sjanger.finnSjanger(sc.next());
+		
+		System.out.print("PlateSelskap: ");
+		String plateselskap = sc.next();
 
 		CD nycd = new CD(cdNummer, artist, tittel, aar, sjanger, plateselskap);
 		// lage et nytt cd objekt?
-		sc.close(); // lukke
+		
 		return nycd;
 	}
 
 	// vise en CD med alle opplysninger på skjerm (husk tekst for sjanger)
 	public void visCD(CD cd) {
-		cd.toString();
+		System.out.println(cd.toString());
 
 	}
 
 	// Skrive ut alle CD-er med en spesiell delstreng i tittelen
 	public void skrivUtCdDelstrengITittel(CDarkivADT cda, String delstreng) {
-		cda.sokTittel(delstreng).toString();
+		CD[] samling = cda.sokTittel(delstreng);
+		for (int i = 0; i < samling.length; i++) {
+			System.out.println(samling[i].getTittel().toString());
+		}
+
 	}
 
 	// Skriver ut alle CD-er av en artist / en gruppe
 	public void skrivUtCdArtist(CDarkivADT cda, String delstreng) {
-		cda.sokArtist(delstreng).toString();
+		CD[] samling = cda.sokArtist(delstreng);
+		
+		System.out.println("CD-er av " + samling[0].getArtist()+"\n");
+		for (int i = 0; i < samling.length; i++) {
+			System.out.println(samling[i].toString());
+		}
 
 	}
 

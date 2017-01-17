@@ -16,7 +16,7 @@ public class SkriveTilFil {
         
         try {
             // 1 - FileWriter
-            FileWriter ansFil = new FileWriter(ANSATT_FIL, false);
+            FileWriter ansFil = new FileWriter(ANSATT_FIL);
             
             // 2 - PrintWriter
             PrintWriter utfil = new PrintWriter(ansFil);

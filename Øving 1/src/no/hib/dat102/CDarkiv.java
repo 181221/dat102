@@ -1,9 +1,16 @@
 package no.hib.dat102;
 
 import no.hib.data102.adt.CDarkivADT;
+/**
+ * 
+ * @author Peder
+ * CD-Arkiv med alle CDene og metodene fra interface. 
+ *
+ */
 
 public class CDarkiv implements CDarkivADT {
 	// Instansvariable
+	final static int STK = 100;
 	private CD[] cdTabell;
 	private int antall;
 
@@ -11,6 +18,10 @@ public class CDarkiv implements CDarkivADT {
 	public CDarkiv(int maxAntall) {
 		cdTabell = new CD[maxAntall];
 		antall = 0;
+		
+	}
+	public CDarkiv(){
+		this(STK);
 	}
 
 	@Override
@@ -19,7 +30,7 @@ public class CDarkiv implements CDarkivADT {
 	}
 
 	private void utvidKapasitet() {
-		CD[] hjelpetabell = new CD[(int) (1.1 * cdTabell.length)];
+		CD[] hjelpetabell = new CD[(int) Math.ceil(1.1 * cdTabell.length)];
 		for (int i = 0; i < cdTabell.length; i++) {
 			hjelpetabell[i] = cdTabell[i];
 		}
@@ -53,7 +64,6 @@ public class CDarkiv implements CDarkivADT {
 		for (int i = 0; i < antall; i++) {
 			if (cdTabell[i].getTittel().contains(delstreng)) {
 				tittel[i] = cdTabell[i];
-				return tittel;
 			}
 		}
 		return tittel;
@@ -79,7 +89,7 @@ public class CDarkiv implements CDarkivADT {
 	public int hentAntall(Sjanger sjanger) {
 		int antallSjanger = 0;
 		for (int i = 0; i < antall; i++) {
-			if (cdTabell[i].getSjanger().equals(sjanger)) {
+			if (cdTabell[i].getSjanger()==(sjanger)) {
 				antallSjanger++;
 			}
 		}
