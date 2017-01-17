@@ -23,5 +23,20 @@ public enum Sjanger {
         return sjang;
     }
 
+	/** Søker og henter sjanger med string som input
+	 * @param navn Navn på sjanger
+	 * @return Sjanger
+	 */
+	public static Sjanger finnSjanger(String navn) {
+		Sjanger sjang = null;
+		for (Sjanger sj: Sjanger.values()) {
+			if (sj.toString().equals(navn.toUpperCase())) {
+				sjang = sj;
+				break;
+			}
+		}
+		return sjang;
+	} // metode
+
 }
 

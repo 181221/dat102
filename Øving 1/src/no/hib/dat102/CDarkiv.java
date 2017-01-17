@@ -3,30 +3,42 @@ package no.hib.dat102;
 import no.hib.data102.adt.CDarkivADT;
 
 public class CDarkiv implements CDarkivADT {
-	//Instansvariable
-	 private CD[] cdTabell;
-	 private int antall;
-	 
-	 //Konstruktører og andre metoder
-	public CDarkiv(int maxAntall){
+	// Instansvariable
+	private CD[] cdTabell;
+	private int antall;
+
+	// Konstruktører og andre metoder
+	public CDarkiv(int maxAntall) {
 		cdTabell = new CD[maxAntall];
 		antall = 0;
 	}
-	 @Override
+
+	@Override
 	public CD[] hentCdTabell() {
 		return cdTabell;
 	}
+
+	private void utvidKapasitet() {
+		CD[] hjelpetabell = new CD[(int) (1.1 * cdTabell.length)];
+		for (int i = 0; i < cdTabell.length; i++) {
+			hjelpetabell[i] = cdTabell[i];
+		}
+		cdTabell = hjelpetabell;
+	}
+
 	@Override
 	public void leggTilCd(CD nyCd) {
-		if(antall < cdTabell.length){
-			cdTabell[antall] = nyCd;
-			antall++;
+		if (antall == cdTabell.length) {
+			utvidKapasitet();
 		}
+		cdTabell[antall] = nyCd;
+		antall++;
 	}
+
 	@Override
 	public boolean slettCd(int cdNr) {
 		boolean slett = false;
-		if(finsCD(cdNr) != -1){
+		if (finsCD(cdNr) != -1) {
 			cdTabell[finsCD(cdNr)] = cdTabell[antall];
 			cdTabell[antall] = null;
 			antall--;
@@ -34,51 +46,74 @@ public class CDarkiv implements CDarkivADT {
 		}
 		return slett;
 	}
+
 	@Override
-	public CD sokTittel(String delstreng) {
-		CD tittel = null;
-		for(int i = 0; i < antall; i++){
-			if(cdTabell[i].getTittel().equals(delstreng)){
-				tittel = cdTabell[i];
+	public CD[] sokTittel(String delstreng) {
+		CD[] tittel = new CD[antall];
+		for (int i = 0; i < antall; i++) {
+			if (cdTabell[i].getTittel().contains(delstreng)) {
+				tittel[i] = cdTabell[i];
+				return tittel;
 			}
 		}
 		return tittel;
 	}
+
 	@Override
-	public CD sokArtist(String delstreng) {
-		CD artist = null;
-		for(int i = 0; i < antall; i++){
-			if(cdTabell[i].getArtist().equals(delstreng)){
-				artist = cdTabell[i];
+	public CD[] sokArtist(String delstreng) {
+		CD[] artist = new CD[antall];
+		for (int i = 0; i < antall; i++) {
+			if (cdTabell[i].getArtist().contains(delstreng)) {
+				artist[i] = cdTabell[i];
 			}
 		}
 		return artist;
 	}
+
 	@Override
 	public int hentAntall() {
-		
 		return antall;
 	}
+
 	@Override
 	public int hentAntall(Sjanger sjanger) {
 		int antallSjanger = 0;
-		for(int i = 0; i < antall;i++){
-			if(cdTabell[i].getSjanger().equals(sjanger)){
+		for (int i = 0; i < antall; i++) {
+			if (cdTabell[i].getSjanger().equals(sjanger)) {
 				antallSjanger++;
 			}
 		}
 		return antallSjanger;
 	}
-	
+
 	public int finsCD(int cdNr) {
-		boolean finnes = false;
-		for(int i = 0; i < antall && !finnes; i ++){
-			if(cdTabell[i].getCdNummer() == cdNr){
+		for (int i = 0; i < antall ; i++) {
+			if (cdTabell[i].getCdNummer() == cdNr) {
 				return i;
 			}
 		}
 		return -1;
 	}
-
+	/**
+	 * Ved hjelp av å trimme tabellen, vil eventuelle null-referanser alltid
+	 * være på slutten av tabellen. Alle referanser som referer til objekter vil
+	 * komme sammenhengenede etter hverandre. Forusatt da at tabellen ikke er
+	 * blitt tom.
+	 * 
+	 * @param tab
+	 *            Tabell av CD-er
+	 * @param n
+	 *            N er antall elementer
+	 * @return En ny full tabell
+	 */
+	private CD[] trimTab(CD[] tab, int n) {
+		CD[] cdtab2 = new CD[n];
+		int i = 0;
+		while (i < n) {
+			cdtab2[i] = tab[i];
+			i++;
+		} // while
+		return cdtab2;
+	}
 
 }
