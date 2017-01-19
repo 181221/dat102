@@ -5,8 +5,11 @@ import java.util.Scanner;
 import no.hib.data102.adt.CDarkivADT;
 import no.hib.data102.adt.CDarkivEgenADT;
 public class Tekstgrensesnitt {
-	
-	// lese opplysningene om en CD fra tastatur
+
+	/**
+	 * lese opplysningene om en CD fra tastatur
+	 * @return
+	 */
 	public CD lesCD() {
 		Scanner sc = new Scanner(System.in);
 		
@@ -29,21 +32,27 @@ public class Tekstgrensesnitt {
 		String plateselskap = sc.next();
 
 		CD nycd = new CD(cdNummer, artist, tittel, aar, sjanger, plateselskap);
-		// lage et nytt cd objekt?
 		
 		return nycd;
 	}
 
-	// vise en CD med alle opplysninger på skjerm (husk tekst for sjanger)
+	/**
+	 * skriver ut CD med alle opplysninger på skjerm (husk tekst for sjanger)
+	 * @param cd -ref til CDklassen
+	 */
 	public void visCD(CD cd) {
 		System.out.println(cd.toString());
 
 	}
-
-	// Skrive ut alle CD-er med en spesiell delstreng i tittelen
+	/**
+	 * Skrive ut alle CD-er med en spesiell delstreng i tittelen
+	 * @param cda - interfacet med alle metoder.
+	 * @param delstreng - søkeordet.
+	 */
 	public void skrivUtCdDelstrengITittel(CDarkivADT cda, String delstreng) {
 		CD[] samling = cda.sokTittel(delstreng);
 		System.out.println("søker etter..."+ " "+delstreng);
+		
 		if(cda.eksisterer(samling)){
 			System.out.println("Finner: " + (samling.length-1) + " tittel(er)" +" med søkeord: "+ delstreng);
 		}else if (!cda.eksisterer(samling)){
@@ -55,30 +64,34 @@ public class Tekstgrensesnitt {
 			if(samling[i]!=null){
 				System.out.println(samling[i].getTittel().toString());
 			}
-			
 		}
-
 	}
-
-	// Skriver ut alle CD-er av en artist / en gruppe
+	
+	/**
+	 * Søker etter artist og skrive ut.
+	 * @param cda - cdArkiv tabbel
+	 * @param delstreng  - Søkeord
+	 */
 	public void skrivUtCdArtist(CDarkivADT cda, String delstreng) {
 		CD[] samling = cda.sokArtist(delstreng);
 		System.out.println("søker etter artist(er) med søkeord... "+ "'"+delstreng+"'");
+		
 		if(cda.eksisterer(samling)){
 			System.out.println("Finner: " + (samling.length-1) + " Artist(er)" +" med søkeord: "+ delstreng);
 		}else if (!cda.eksisterer(samling)){
 			System.out.println("Ingen resultater på " + delstreng);
 		}
-	
 		for (int i = 0; i < samling.length; i++) {
 			if(samling[i]!=null){
 				System.out.println(samling[i].toString());
 			}		
 		}
 	}
-
-	// Skrive ut en enkel statistikk som inneholder antall CD-er totalt
-	// og hvor mange det er i hver sjanger
+	/**
+	 * Skrive ut en enkel statistikk som inneholder antall CD-er totalt
+	 * og hvor mange det er i hver sjanger
+	 * @param cda
+	 */
 	public void skrivUtStatistikk(CDarkivADT cda) {
 		System.out.println("Antall CD'er i arkivet: " + cda.hentAntall());
 		System.out.println("Antall CD'er med sjangeren Rock: " + cda.hentAntall(Sjanger.finnSjanger("rock")));
@@ -87,6 +100,5 @@ public class Tekstgrensesnitt {
 		System.out.println("Antall CD'er med sjangeren Classic: " + cda.hentAntall(Sjanger.finnSjanger("classic")));
 	}
 
-	// … Ev. andre metoder
 
 }

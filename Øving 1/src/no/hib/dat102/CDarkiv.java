@@ -17,11 +17,18 @@ public class CDarkiv implements CDarkivADT, CDarkivEgenADT {
 	private int antall;
 
 	// Konstruktører og andre metoder
+	/**
+	 * Tilordner maxAntall til Array
+	 * @param maxAntall
+	 */
 	public CDarkiv(int maxAntall) {
 		cdTabell = new CD[maxAntall];
 		antall = 0;
 		
 	}
+	/**
+	 * 100 plasser som standard verdi.
+	 */
 	public CDarkiv(){
 		this(STK);
 	}
@@ -30,7 +37,9 @@ public class CDarkiv implements CDarkivADT, CDarkivEgenADT {
 	public CD[] hentCdTabell() {
 		return cdTabell;
 	}
-
+	/**
+	 *Utvider tabellen med 10 prosent 
+	 */
 	private void utvidKapasitet() {
 		CD[] hjelpetabell = new CD[(int) Math.ceil(1.1 * cdTabell.length)];
 		for (int i = 0; i < cdTabell.length; i++) {
@@ -80,7 +89,6 @@ public class CDarkiv implements CDarkivADT, CDarkivEgenADT {
 			}
 		}
 		return false;
-		
 	}
 
 	@Override
@@ -110,7 +118,11 @@ public class CDarkiv implements CDarkivADT, CDarkivEgenADT {
 		}
 		return antallSjanger;
 	}
-
+	/**
+	 * 
+	 * @param cdNr - cdnummer
+	 * @return if eksist "1" else "-1" 
+	 */
 	public int finsCD(int cdNr) {
 		for (int i = 0; i < antall ; i++) {
 			if (cdTabell[i].getCdNummer() == cdNr) {
