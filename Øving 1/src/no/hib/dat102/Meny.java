@@ -36,7 +36,7 @@ public class Meny {
 	}
 	public void hovedMeny(Scanner tast){
 		
-		String meny = "\n1 - Skrive nytt arkiv" + "\n2 - Fortsette på arkviv fra fil" + "\n3 - Avslutt" +"\n\nValg: " ;
+		String meny = "\n1 - Skrive nytt arkiv" + "\n2 - Fortsette på arkviv fra fil" + "\n3 - Avslutt for å lagre" +"\n\nValg: " ;
 		
 		do{
 			System.out.print(meny);
@@ -58,7 +58,7 @@ public class Meny {
 		
 	}
 	public void ArkivValg(Scanner tast){
-		String meny = "\n1 - Legg til CD \n2 - Slett CD \n3 - Sok paa Tittel \n4 - Sok paa Artist \n5 - SkrivUtStatistikk \n6 - Avslutt   ";
+		String meny = "\n1 - Legg til CD \n2 - Slett CD \n3 - Sok paa Tittel \n4 - Sok paa Artist \n5 - SkrivUtStatistikk \n6 - Avslutt for å lagre  ";
 		do{
 			System.out.print(meny);
 			valg = tast.nextInt();
@@ -74,13 +74,15 @@ public class Meny {
 				break;
 			case 3:
 				//søker på tittel
+				System.out.print("Søk på tittel: ");
 				String delstreng = tast.next();
-				cda.sokTittel(delstreng);
+				tekstgr.skrivUtCdDelstrengITittel(cda, delstreng);
 				break;
 			case 4:
 				//søker på artist
+				System.out.print("Søk på artist: ");
 				String dels = tast.next();
-				cda.sokArtist(dels);
+				tekstgr.skrivUtCdArtist(cda, dels);
 				break;
 			case 5:
 				//skriver ut statistikk
@@ -112,7 +114,8 @@ public class Meny {
 		
 		System.out.print("Oppgi fil på arkiv: ");
 		String filnavn = tast.next();
-		Fil.lesFraFil(filnavn + ".txt");
+		cda = Fil.lesFraFil(filnavn + ".txt");
+		
 		
 		ArkivValg(tast);
 		

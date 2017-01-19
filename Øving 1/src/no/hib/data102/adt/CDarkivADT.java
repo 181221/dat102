@@ -8,7 +8,7 @@ import no.hib.dat102.Sjanger;
  * @author Peder
  *
  */
-public interface CDarkivADT {
+public interface CDarkivADT extends CDarkivEgenADT{
 	
 	/**
 	 * returenerer en tabell av CD-er
@@ -32,6 +32,7 @@ public interface CDarkivADT {
 	 * @return Tabell av Tittler gitt delstreng
 	 */
 	CD[] sokTittel(String delstreng);
+	
 
 	/**
 	 * Søker og henter artister med en gitt delstreng

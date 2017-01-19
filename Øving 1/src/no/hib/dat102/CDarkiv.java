@@ -1,6 +1,8 @@
 package no.hib.dat102;
 
 import no.hib.data102.adt.CDarkivADT;
+import no.hib.data102.adt.CDarkivEgenADT;
+
 /**
  * 
  * @author Peder
@@ -8,7 +10,7 @@ import no.hib.data102.adt.CDarkivADT;
  *
  */
 
-public class CDarkiv implements CDarkivADT {
+public class CDarkiv implements CDarkivADT, CDarkivEgenADT {
 	// Instansvariable
 	final static int STK = 100;
 	private CD[] cdTabell;
@@ -50,8 +52,8 @@ public class CDarkiv implements CDarkivADT {
 	public boolean slettCd(int cdNr) {
 		boolean slett = false;
 		if (finsCD(cdNr) != -1) {
-			cdTabell[finsCD(cdNr)] = cdTabell[antall];
-			cdTabell[antall] = null;
+			cdTabell[finsCD(cdNr)] = cdTabell[antall-1];
+			cdTabell[antall-1] = null;
 			antall--;
 			slett = true;
 		}
@@ -66,7 +68,19 @@ public class CDarkiv implements CDarkivADT {
 				tittel[i] = cdTabell[i];
 			}
 		}
+		trimTab(tittel, antall);
 		return tittel;
+	}
+	@Override
+	public boolean eksisterer(CD[] tittel){
+		
+		for(int i = 0; i < antall; i++){
+			if(tittel[i] != null){
+				return true;
+			}
+		}
+		return false;
+		
 	}
 
 	@Override
@@ -77,6 +91,7 @@ public class CDarkiv implements CDarkivADT {
 				artist[i] = cdTabell[i];
 			}
 		}
+		trimTab(artist, antall);
 		return artist;
 	}
 

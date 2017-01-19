@@ -1,9 +1,11 @@
 package no.hib.dat102;
 
-import java.util.*;
-import no.hib.data102.adt.CDarkivADT;
+import java.util.Scanner;
 
+import no.hib.data102.adt.CDarkivADT;
+import no.hib.data102.adt.CDarkivEgenADT;
 public class Tekstgrensesnitt {
+	
 	// lese opplysningene om en CD fra tastatur
 	public CD lesCD() {
 		Scanner sc = new Scanner(System.in);
@@ -41,8 +43,19 @@ public class Tekstgrensesnitt {
 	// Skrive ut alle CD-er med en spesiell delstreng i tittelen
 	public void skrivUtCdDelstrengITittel(CDarkivADT cda, String delstreng) {
 		CD[] samling = cda.sokTittel(delstreng);
+		System.out.println("søker etter..."+ " "+delstreng);
+		if(cda.eksisterer(samling)){
+			System.out.println("Finner: " + (samling.length-1) + " tittel(er)" +" med søkeord: "+ delstreng);
+		}else if (!cda.eksisterer(samling)){
+			System.out.println("Ingen resultater på " + delstreng);
+		}
+		
 		for (int i = 0; i < samling.length; i++) {
-			System.out.println(samling[i].getTittel().toString());
+		
+			if(samling[i]!=null){
+				System.out.println(samling[i].getTittel().toString());
+			}
+			
 		}
 
 	}
@@ -50,12 +63,18 @@ public class Tekstgrensesnitt {
 	// Skriver ut alle CD-er av en artist / en gruppe
 	public void skrivUtCdArtist(CDarkivADT cda, String delstreng) {
 		CD[] samling = cda.sokArtist(delstreng);
-		
-		System.out.println("CD-er av " + samling[0].getArtist()+"\n");
-		for (int i = 0; i < samling.length; i++) {
-			System.out.println(samling[i].toString());
+		System.out.println("søker etter artist(er) med søkeord... "+ "'"+delstreng+"'");
+		if(cda.eksisterer(samling)){
+			System.out.println("Finner: " + (samling.length-1) + " Artist(er)" +" med søkeord: "+ delstreng);
+		}else if (!cda.eksisterer(samling)){
+			System.out.println("Ingen resultater på " + delstreng);
 		}
-
+	
+		for (int i = 0; i < samling.length; i++) {
+			if(samling[i]!=null){
+				System.out.println(samling[i].toString());
+			}		
+		}
 	}
 
 	// Skrive ut en enkel statistikk som inneholder antall CD-er totalt

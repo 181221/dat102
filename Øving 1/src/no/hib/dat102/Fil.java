@@ -19,8 +19,6 @@ import no.hib.data102.adt.CDarkivADT;
  */
 public class Fil {
 	private static final String SKILLE = "#";
-	
-
 	/**
 	 * @param filnavn
 	 * @return Referansen til CD-arkivet
