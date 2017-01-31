@@ -1,5 +1,6 @@
 package no.hib.dat102;
 
+
 import java.util.Scanner;
 
 import no.hib.data102.adt.CDarkivADT;
