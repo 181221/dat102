@@ -40,7 +40,7 @@ public class Fil {
 			int n = Integer.parseInt(linje);
 
 			// Oppretter CDarkiv
-			cda = new CDarkiv(n);
+			cda = new CDarkiv2();
 
 			// 4 - Les postene, en hel post om gangen
 			for (int i = 0; i < n; i++) {
