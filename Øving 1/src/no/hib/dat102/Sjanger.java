@@ -16,6 +16,7 @@ public enum Sjanger {
 	  public int getNr() { 
 	       return nr;
       }
+	  
         
     public static Sjanger finnSjanger(int n) {
         Sjanger sjang = null;
