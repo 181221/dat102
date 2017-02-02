@@ -13,16 +13,11 @@ public class KoeTest {
 	//referanse til stabel;
 	private KoeADT<Character> stabel;
 	protected static final int SIZE = 100;
-	
-	private String s0 = "dette er en test";
-	private String s1 = "";
-	private String s2 = "lolololol";
-	private String s3 = "heieihei";
-	
+
 	private Character e0 = 'A';
 	private Character e1 = 'B';
 	private Character e2 = 'C';
-	private Character e3 = 'D';
+	
 	/**
 	 * Hent en ny stabel for hver test.
 	 */
@@ -37,17 +32,6 @@ public class KoeTest {
 	@Test
 	public final void nyStabelErTom(){
 		assertTrue(stabel.erTom());
-	}
-	/**
-	 * test på å legge til element. 
-	 */
-	@Test
-	public final void testInn(){
-		for(int i = 0; i < s0.length(); i++){
-			stabel.innKoe(new Character(s0.charAt(i)));
-		}
-		assertFalse(stabel.erTom());
-		assertTrue(stabel.antall() == s0.length());
 	}
 	
 	/**
