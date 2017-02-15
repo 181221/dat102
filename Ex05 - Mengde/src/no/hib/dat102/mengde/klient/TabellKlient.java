@@ -10,8 +10,8 @@ public class TabellKlient {
 		final int ANTALL = 5;
 		TabellMengde<String> ordliste1 = new TabellMengde<String>(ANTALL);
 		TabellMengde<String> ordliste2 = new TabellMengde<String>(ANTALL);
-		TabellMengde<String> unionen = new TabellMengde<String>(ordliste1.antall() + ordliste2.antall());
-
+		TabellMengde<String> unionen = new TabellMengde<String>(ordliste1.antall() + ordliste2.antall()); //mindre effektivt
+		TabellMengde<String> unionEff = new TabellMengde<String>(ordliste1.antall() + ordliste2.antall()); //effektiv endre antall...
 		String AvsluttOrd = "zzz";
 
 		System.out.println("skriv inn 5 ord:.. Avslutt med 'zzz'");
@@ -46,7 +46,20 @@ public class TabellKlient {
 			System.out.println(" Antall elementer i mengde2: " + ordliste2.antall());
 		}
 		System.out.println();
-		unionen = (TabellMengde<String>) ordliste1.union(ordliste2);
+		
+		
+		/*
+		 * algoritmer for å effektivisere unionen 
+		 */
+		unionen = (TabellMengde<String>) ordliste1.union(ordliste2); //legger elementer i m1 og m2 sammen
+		unionEff.leggTilAlle(ordliste1);
+		unionEff.leggTilAlle(ordliste2);
+		
+		
+		
+		
+		
+		
 		TabellIterator<String> opprams = (TabellIterator<String>) unionen.oppramser();
 		System.out.println("Unionen av mengdene er:...");
 		teller = 0;
