@@ -67,18 +67,18 @@ public class TabellMengde<T> implements MengdeADT<T> {
 		// Søker etter og fjerner element.Retur med null ved ikke-funn
 		//
 		T svar = null;
-		if(inneholder(element)){
-			for(int i = 0; i < antall; i ++){
-				if(tab[i].equals(element)){
+		if (inneholder(element)) {
+			for (int i = 0; i < antall; i++) {
+				if (tab[i].equals(element)) {
 					svar = tab[i];
-					tab[i] = tab[antall -1];
-					tab[antall -1] = null;
+					tab[i] = tab[antall - 1];
+					tab[antall - 1] = null;
 					antall--;
 				}
 			}
 		}
-	
-       return svar;	
+
+		return svar;
 	}
 
 	@Override
@@ -95,7 +95,6 @@ public class TabellMengde<T> implements MengdeADT<T> {
 
 		return begge;
 	}
-
 
 	private void settInn(T element) {
 		if (antall == tab.length) {
@@ -117,27 +116,23 @@ public class TabellMengde<T> implements MengdeADT<T> {
 
 	@Override
 	public boolean erLik(MengdeADT<T> m2) {
-//		boolean likeMengder = true;
-//		T element;
-		Iterator<T> teller = m2.oppramser();
-		Iterator<T> tellerm1 = oppramser();
-		while (teller.hasNext() && tellerm1.hasNext()){
-			if(!teller.next().equals(tellerm1.next())){
+		assert this.antall() == m2.antall();
+		boolean likeMengder = true;
+		T element;
+		Iterator<T> tellerLike = m2.oppramser();
+
+		while (tellerLike.hasNext()) {
+			element = tellerLike.next();
+			if (!this.inneholder(element)) {
 				return false;
 			}
 		}
-		return true;
-//		for(T elem : tab){
-//			if(!elem.equals(m2.oppramser().next())){
-//				likeMengder = false;
-//			}
-//		}
-//		return likeMengder;
+		return likeMengder;
 	}
 
 	public void leggTilAlle(MengdeADT<T> m2) {
 		Iterator<T> teller = m2.oppramser();
-		while (teller.hasNext()){
+		while (teller.hasNext()) {
 			leggTil(teller.next());
 		}
 	}

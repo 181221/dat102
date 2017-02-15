@@ -85,7 +85,8 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 		if (funnet) {
 			if (forgjenger == null) {// funnet i 1.node i listen
 				slettForan();
-			} else if (aktuell.getNeste() == null) {// Funnet i siste node i listen.
+			} else if (aktuell.getNeste() == null) {// Funnet i siste node i
+													// listen.
 				forgjenger.setNeste(null);
 				antall--;
 			} else {
@@ -133,12 +134,20 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 	}
 
 	@Override
- public boolean erLik(MengdeADT<T> m2) {
-  boolean likeMengder = true;
-  T element = null;
-  //...Fyll ut
-  return likeMengder;
- }
+	public boolean erLik(MengdeADT<T> m2) {
+		assert this.antall == m2.antall(); //må være likt antall;
+		boolean likeMengder = true;
+		T element = null;
+		
+		Iterator<T> m1 = m2.oppramser();
+		while (m1.hasNext() && likeMengder) {
+			element = m1.next();
+			if(!this.inneholder(element)){
+				likeMengder = false;
+			}
+		}
+		return likeMengder;
+	}
 
 	@Override
 	public boolean erTom() {
