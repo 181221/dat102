@@ -51,7 +51,7 @@ public class Ordliste {
 		ordListeDiff = (KjedetMengde<String>) ordListe1.differens(ordListe2);
 		System.out.println("Utskrift av differansen av begge ordlistene");
 
-		//....
+	}
 		
 
 }

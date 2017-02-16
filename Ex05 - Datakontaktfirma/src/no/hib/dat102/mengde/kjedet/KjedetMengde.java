@@ -184,7 +184,7 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 			if (!inneholder(element)) {
 				begge.settInn(element);
 			}
-			
+
 		}
 		return begge;
 	}
@@ -209,7 +209,6 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 		Iterator<T> teller = this.oppramser();
 		LinearNode<T> aktuell = start;
 		T element;
-		
 
 		while (teller.hasNext()) {
 			element = teller.next();
@@ -219,5 +218,18 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 		}
 		return AikkeB;
 	}
+	/**
+	 * returnerer en streng 
+	 */
+	@Override
+	public String toString() {
+		String resultat = "";
+		LinearNode<T> aktuell = start;
+		while (aktuell != null) {
+			resultat += aktuell.getElement().toString() + "\t";
+			aktuell = aktuell.getNeste();
+		}
+		return resultat;
+	}//
 
 }// class

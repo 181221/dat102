@@ -35,6 +35,11 @@ public interface MengdeADT<T> {
 	 */
 	MengdeADT<T> union(MengdeADT<T> m2);
 	
+	/**
+	 * 
+	 * @param m2 er mengden det skal lages union med.
+	 * @return union av mengden m2 og this-mengden
+	 */
 	MengdeADT<T> EffUnion(MengdeADT<T> m2);
 
 	/**
@@ -69,16 +74,16 @@ public interface MengdeADT<T> {
 
 	/**
 	 * 
-	 * @param m2
+	 * @param m2 er mengden det skal lages snitt med
 	 * @return
 	 */
 	MengdeADT<T> snitt(MengdeADT<T> m2);
+	
 	/**
 	 * 
-	 * @param m2
+	 * @param m2 er mengden det skal lages differens med
 	 * @return
 	 */
-
 	MengdeADT<T> differens(MengdeADT<T> m2);
 
 	/**
