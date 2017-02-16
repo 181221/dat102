@@ -13,7 +13,7 @@ public class Ordliste {
 	public static void main(String[] args) {
 
 		KjedetMengde<String> ordListe1 = new KjedetMengde<String>();// Tilsvarende for TabellMengde
-
+		
 		String[] ord = { "God", "dag", "Hans", "Hansen", "Hansaby", "Olsen", "Ole", "buss", "rute", "Bergen" };
 
 		Scanner tastatur = new Scanner(System.in);
@@ -28,9 +28,7 @@ public class Ordliste {
 		String streng = tastatur.nextLine();
 		// Leser inn ord
 		while (!streng.equals("zzz")) {
-
-			//...Fyll ut
-			
+			ordListe2.leggTil(streng);
 			System.out.print("Oppgi en streng, avslutt med zzz :");
 			streng = tastatur.nextLine();
 		} // while

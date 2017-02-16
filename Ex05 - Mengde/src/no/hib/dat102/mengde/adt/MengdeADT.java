@@ -34,6 +34,8 @@ public interface MengdeADT<T> {
 	 * @return er union av mengden m2 og this-mengden
 	 */
 	MengdeADT<T> union(MengdeADT<T> m2);
+	
+	MengdeADT<T> EffUnion(MengdeADT<T> m2);
 
 	/**
 	 * 
@@ -70,14 +72,14 @@ public interface MengdeADT<T> {
 	 * @param m2
 	 * @return
 	 */
-	//MengdeADT<T> snitt(MengdeADT<T> m2);
+	MengdeADT<T> snitt(MengdeADT<T> m2);
 	/**
 	 * 
 	 * @param m2
 	 * @return
 	 */
 
-	//MengdeADT<T> differens(MengdeADT<T> m2);
+	MengdeADT<T> differens(MengdeADT<T> m2);
 
 	/**
 	 * Oppretter et 'oppramsobjekt' som kan brukes til å gjennomgå alle

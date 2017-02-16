@@ -1,6 +1,8 @@
 package no.hib.dat102.mengde.kjedet;
 
 import no.hib.dat102.mengde.adt.*;
+import no.hib.dat102.mengde.tabell.TabellMengde;
+
 //********************************************************************
 // Kjedet implementasjon av en mengde. 
 //********************************************************************
@@ -135,14 +137,16 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 
 	@Override
 	public boolean erLik(MengdeADT<T> m2) {
-		assert this.antall == m2.antall(); //må være likt antall;
+		if (this.antall != m2.antall()) {
+			return false;
+		}
 		boolean likeMengder = true;
 		T element = null;
-		
+
 		Iterator<T> m1 = m2.oppramser();
 		while (m1.hasNext() && likeMengder) {
 			element = m1.next();
-			if(!this.inneholder(element)){
+			if (!this.inneholder(element)) {
 				likeMengder = false;
 			}
 		}
@@ -162,6 +166,58 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 	@Override
 	public Iterator<T> oppramser() {
 		return new KjedetIterator<T>(start);
+	}
+
+	@Override
+	public MengdeADT<T> EffUnion(MengdeADT<T> m2) {
+		KjedetMengde<T> begge = new KjedetMengde<T>();
+		LinearNode<T> aktuell = start;
+		T element;
+		Iterator<T> oppram = m2.oppramser();
+
+		while (aktuell != null) {
+			begge.settInn(aktuell.getElement());
+			aktuell = aktuell.getNeste();
+		}
+		while (oppram.hasNext()) {
+			element = oppram.next();
+			if (!inneholder(element)) {
+				begge.settInn(element);
+			}
+			
+		}
+		return begge;
+	}
+
+	@Override
+	public MengdeADT<T> snitt(MengdeADT<T> m2) {
+		KjedetMengde<T> snitt = new KjedetMengde<T>();
+		Iterator<T> oppram = m2.oppramser();
+		LinearNode<T> aktuell = start;
+		T element;
+
+		while (aktuell != null) {
+			snitt.settInn(aktuell.getElement());
+			aktuell = aktuell.getNeste();
+		}
+		return snitt;
+	}
+
+	@Override
+	public MengdeADT<T> differens(MengdeADT<T> m2) {
+		KjedetMengde<T> AikkeB = new KjedetMengde<T>();
+		Iterator<T> teller = this.oppramser();
+		LinearNode<T> aktuell = start;
+		T element;
+		
+
+		while (teller.hasNext()) {
+			element = teller.next();
+			if (!m2.inneholder(element)) {
+				AikkeB.settInn(element);
+			}
+		}
+		return AikkeB;
 	}
 
 }// class

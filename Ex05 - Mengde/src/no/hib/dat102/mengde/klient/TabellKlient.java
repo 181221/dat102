@@ -1,5 +1,6 @@
 package no.hib.dat102.mengde.klient;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 import no.hib.dat102.mengde.tabell.TabellIterator;
@@ -52,14 +53,9 @@ public class TabellKlient {
 		 * algoritmer for å effektivisere unionen 
 		 */
 		unionen = (TabellMengde<String>) ordliste1.union(ordliste2); //legger elementer i m1 og m2 sammen
-		unionEff.leggTilAlle(ordliste1);
-		unionEff.leggTilAlle(ordliste2);
-		
-		
-		
-		
-		
-		
+//		unionEff.leggTilAlle(ordliste1);
+//		unionEff.leggTilAlle(ordliste2);
+		Iterator<String> gjennom = unionen.oppramser();
 		TabellIterator<String> opprams = (TabellIterator<String>) unionen.oppramser();
 		System.out.println("Unionen av mengdene er:...");
 		teller = 0;

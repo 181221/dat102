@@ -96,6 +96,20 @@ public class TabellMengde<T> implements MengdeADT<T> {
 		return begge;
 	}
 
+	@Override
+	public MengdeADT<T> EffUnion(MengdeADT<T> m2) {
+		TabellMengde<T> begge = new TabellMengde<T>(this.antall + m2.antall());
+		Iterator<T> oppram = m2.oppramser();
+
+		for (int i = 0; i < antall; i++) {
+			begge.settInn(this.tab[i]);
+		}
+		while (oppram.hasNext()) {
+			begge.leggTil(oppram.next());
+		}
+		return begge;
+	}
+
 	private void settInn(T element) {
 		if (antall == tab.length) {
 			utvidKapasitet();
@@ -140,6 +154,44 @@ public class TabellMengde<T> implements MengdeADT<T> {
 	@Override
 	public Iterator<T> oppramser() {
 		return new TabellIterator<T>(tab, antall);
+	}
+
+	@Override
+	public MengdeADT<T> snitt(MengdeADT<T> m2) {
+		TabellMengde<T> snitt = new TabellMengde<T>(this.antall + m2.antall());
+		Iterator<T> oppram = m2.oppramser();
+		T element;
+		
+		for (int i = 0; i < this.antall; i++) {
+			snitt.settInn(this.tab[i]);
+		}
+
+		while (oppram.hasNext()) {
+			element = oppram.next();
+			if (m2.inneholder(element)) {
+				snitt.settInn(element);
+			}
+		}
+		return snitt;
+	}
+	/*
+	 * A = {1,2,3,4} 
+	 * B = {1,3,5,6,7}
+	 * A\B = {2,4}
+	 */
+	@Override
+	public MengdeADT<T> differens(MengdeADT<T> m2) {
+		TabellMengde<T> AikkeB = new TabellMengde<T>(this.antall + m2.antall());
+		Iterator<T> teller = this.oppramser();
+		T element;
+		
+		while (teller.hasNext()) {
+			element = teller.next();
+			if(!m2.inneholder(element)){
+				AikkeB.settInn(element);
+			}
+		}
+		return AikkeB;
 	}
 
 }// class
