@@ -16,7 +16,7 @@ public class Medlem {
 		this.navn = navn;
 		this.hobby = hobby;
 		this.statusIndeks = statusIndeks;
-
+		
 	}
 
 	public String getNavn() {
