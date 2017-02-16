@@ -1,20 +1,22 @@
 package no.hib.dat102.modell;
 
 import no.hib.dat102.mengde.adt.MengdeADT;
+import no.hib.dat102.mengde.kjedet.KjedetMengde;
 
 public class Medlem {
 	private String navn;
 	private MengdeADT<Hobby> hobby;
 	private int statusIndeks;
-	
-	public Medlem(){
-		this("",null,-1);
+
+	public Medlem() {
+		this("", null, -1);
 	}
 
 	public Medlem(String navn, MengdeADT<Hobby> hobby, int statusIndeks) {
 		this.navn = navn;
 		this.hobby = hobby;
 		this.statusIndeks = statusIndeks;
+
 	}
 
 	public String getNavn() {
@@ -42,14 +44,14 @@ public class Medlem {
 	}
 
 	/**
-	 * avgjør om to medlemmer passer til hverandre og
-	 * altså kan danne et par. To medlemmer passer til hverandre dersom de har nøyaktig samme hobbyer
+	 * avgjør om to medlemmer passer til hverandre og altså kan danne et par. To
+	 * medlemmer passer til hverandre dersom de har nøyaktig samme hobbyer
+	 * 
 	 * @param medlem2
 	 */
-	public void passerTil(Medlem medlem2){
-		
-		System.out.println("Metode ikke implementert");
+	public boolean passerTil(Medlem medlem2) {
+		Medlem k = (Medlem) medlem2.getHobby();
+		return this.getHobby().equals(k);
 	}
-	
 
 }

@@ -7,7 +7,9 @@ public class Datakontakt {
 
 	/**
 	 * Oppretter en tabell med medlemmer
-	 * @param antall angir størrelsen.
+	 * 
+	 * @param antall
+	 *            angir størrelsen.
 	 */
 	public Datakontakt(int antall) {
 		medlemmer = new Medlem[antall];
@@ -36,24 +38,32 @@ public class Datakontakt {
 	public void setAntallMedlemmer(int antallMedlemmer) {
 		this.antallMedlemmer = antallMedlemmer;
 	}
-	public boolean erTom(){
+
+	public boolean erTom() {
 		return antallMedlemmer == 0;
+	}
+
+	private void utvidKapasitet() {
+		Medlem[] hjelpetabell = new Medlem[(int) Math.ceil(2 * medlemmer.length)];
+		for (int i = 0; i < medlemmer.length; i++) {
+			hjelpetabell[i] = medlemmer[i];
+		}
+		medlemmer = hjelpetabell;
 	}
 
 	/**
 	 * legger til et nytt medlem i medlemstabellen
+	 * 
 	 * @param person
-	 *            
+	 * 
 	 * @return
 	 */
-	public Medlem leggTilMedlem(Medlem person) {
-		Medlem k = null;
-		if(antallMedlemmer < medlemmer.length){
-			medlemmer[antallMedlemmer] = person;
-			k = person;
-			antallMedlemmer++;
+	public void leggTilMedlem(Medlem person) {
+		if (antallMedlemmer == medlemmer.length) {
+			utvidKapasitet();
 		}
-		return k;
+		medlemmer[antallMedlemmer] = person;
+		antallMedlemmer++;
 	}
 
 	/**
@@ -64,10 +74,10 @@ public class Datakontakt {
 	 * 
 	 * @param medlemsnavn
 	 */
-	public int finnMedlemsIndeks(String medlemsnavn) {
+	public int finnMedlemsIndeks(Medlem medlemsnavn) {
 		int index = -1;
-		for(Medlem k : medlemmer){
-			if(k.equals(medlemsnavn)){
+		for (Medlem k : medlemmer) {
+			if (k.getNavn().equals(medlemsnavn)) {
 				index = k.getStatusIndeks();
 				break;
 			}
@@ -84,9 +94,18 @@ public class Datakontakt {
 	 * 
 	 * @param medlemsnavn
 	 */
-	public void finnPartnerFor(String medlemsnavn) {
-		// TODO
-		System.out.println("ikke implementer metode");
+	public int finnPartnerFor(Medlem medlemsnavn) {
+		int koblet = -1;
+		int medlemIndex = finnMedlemsIndeks(medlemsnavn);
+
+		for (int i = 0; i < antallMedlemmer && koblet == -1; i++) {
+			if (medlemmer[medlemIndex].passerTil(medlemmer[i])) {
+				medlemsnavn.setStatusIndeks(medlemIndex);
+				medlemmer[i].setStatusIndeks(medlemIndex);
+				koblet = i;
+			}
+		}
+		return koblet;
 	}
 
 	/**
@@ -96,9 +115,16 @@ public class Datakontakt {
 	 * 
 	 * @param medlemsnavn
 	 */
-	public void tilbakestillStausIndeks(String medlemsnavn) {
-		// TODO
-		System.out.println("ikke implementer metode");
+	public void tilbakestillStausIndeks(Medlem medlemsnavn) {
+		
+		int personPar = finnPartnerFor(medlemsnavn); //to personer på returnert index
+		Medlem temp = medlemmer[personPar]; //Den andre personen på gitt index. 
+		if(personPar != -1){
+			medlemsnavn.setStatusIndeks(-1);
+			temp.setStatusIndeks(-1);
+		}else{
+			System.out.println("Par er ikke koblet");
+		}
 	}
 
 }

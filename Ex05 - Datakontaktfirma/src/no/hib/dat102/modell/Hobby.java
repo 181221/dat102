@@ -25,6 +25,7 @@ public class Hobby {
 	/**
 	 * Tester om objektene er like. 
 	 */
+	@Override
 	public boolean equals(Object hobby2) { //
 		Hobby hobbyDenAndre = (Hobby) hobby2;
 		return (hobbyNavn.equals(hobbyDenAndre.getHobbyNavn()));
