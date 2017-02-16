@@ -161,14 +161,10 @@ public class TabellMengde<T> implements MengdeADT<T> {
 		TabellMengde<T> snitt = new TabellMengde<T>(this.antall + m2.antall());
 		Iterator<T> oppram = m2.oppramser();
 		T element;
-		
-		for (int i = 0; i < this.antall; i++) {
-			snitt.settInn(this.tab[i]);
-		}
 
 		while (oppram.hasNext()) {
 			element = oppram.next();
-			if (m2.inneholder(element)) {
+			if (this.inneholder(element)) {
 				snitt.settInn(element);
 			}
 		}

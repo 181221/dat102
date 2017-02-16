@@ -86,9 +86,10 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 		}
 		if (funnet) {
 			if (forgjenger == null) {// funnet i 1.node i listen
-				slettForan();
-			} else if (aktuell.getNeste() == null) {// Funnet i siste node i
-													// listen.
+				resultat = slettForan();
+				
+			} else if (aktuell.getNeste() == null) {// Funnet i siste node i									// listen.
+				resultat = forgjenger.getElement();
 				forgjenger.setNeste(null);
 				antall--;
 			} else {
@@ -146,7 +147,7 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 		Iterator<T> m1 = m2.oppramser();
 		while (m1.hasNext() && likeMengder) {
 			element = m1.next();
-			if (!this.inneholder(element)) {
+			if (!(this.inneholder(element))) {
 				likeMengder = false;
 			}
 		}
