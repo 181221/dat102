@@ -9,12 +9,12 @@ public class Medlem {
 	private int statusIndeks;
 
 	public Medlem() {
-		this("", null, -1);
+		this("", -1);
 	}
 
-	public Medlem(String navn, MengdeADT<Hobby> hobby, int statusIndeks) {
+	public Medlem(String navn, int statusIndeks) {
 		this.navn = navn;
-		this.hobby = hobby;
+		this.hobby = new KjedetMengde<Hobby>();
 		this.statusIndeks = statusIndeks;
 		
 	}
@@ -50,8 +50,7 @@ public class Medlem {
 	 * @param medlem2
 	 */
 	public boolean passerTil(Medlem medlem2) {
-		Medlem k = (Medlem) medlem2.getHobby();
-		return this.getHobby().equals(k);
+		return hobby.erLik(medlem2.getHobby());
 	}
 
 }

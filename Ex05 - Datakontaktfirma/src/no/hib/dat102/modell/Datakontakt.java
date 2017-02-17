@@ -116,13 +116,16 @@ public class Datakontakt {
 	 * @param medlemsnavn
 	 */
 	public void tilbakestillStausIndeks(Medlem medlemsnavn) {
-		
-		int personPar = finnPartnerFor(medlemsnavn); //to personer på returnert index
-		Medlem temp = medlemmer[personPar]; //Den andre personen på gitt index. 
-		if(personPar != -1){
-			medlemsnavn.setStatusIndeks(-1);
-			temp.setStatusIndeks(-1);
-		}else{
+
+		int personPar = finnPartnerFor(medlemsnavn); // to personer på returnere index
+		int medlemIndex = finnMedlemsIndeks(medlemsnavn);
+
+		if (personPar != -1 && medlemIndex != -1) {
+
+			medlemmer[personPar].setStatusIndeks(-1);
+			medlemmer[medlemIndex].setStatusIndeks(-1);
+
+		} else {
 			System.out.println("Par er ikke koblet");
 		}
 	}
