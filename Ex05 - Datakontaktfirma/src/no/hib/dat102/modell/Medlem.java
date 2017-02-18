@@ -43,6 +43,14 @@ public class Medlem {
 		this.statusIndeks = statusIndeks;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Medlem [navn=" + navn + ", hobby=" + hobby + ", statusIndeks=" + statusIndeks + "]";
+	}
+
 	/**
 	 * avgjør om to medlemmer passer til hverandre og altså kan danne et par. To
 	 * medlemmer passer til hverandre dersom de har nøyaktig samme hobbyer

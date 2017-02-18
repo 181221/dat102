@@ -76,10 +76,9 @@ public class Datakontakt {
 	 */
 	public int finnMedlemsIndeks(Medlem medlemsnavn) {
 		int index = -1;
-		for (Medlem k : medlemmer) {
-			if (k.getNavn().equals(medlemsnavn)) {
-				index = k.getStatusIndeks();
-				break;
+		for(int i = 0; i < antallMedlemmer;i++){
+			if(medlemmer[i].getNavn().equals(medlemsnavn.getNavn())){
+				index = i;
 			}
 		}
 		return index;

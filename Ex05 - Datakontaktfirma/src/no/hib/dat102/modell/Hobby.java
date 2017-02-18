@@ -20,7 +20,7 @@ public class Hobby {
 
 	@Override
 	public String toString() {
-		return "Hobbynavn: " +"<"+hobbyNavn+">";
+		return "Hobbynavn: " +"          < "+hobbyNavn+" >";
 	}
 	/**
 	 * Tester om objektene er like. 

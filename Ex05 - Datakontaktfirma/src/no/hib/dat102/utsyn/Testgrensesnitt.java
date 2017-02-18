@@ -1,23 +1,41 @@
 package no.hib.dat102.utsyn;
 
-import no.hib.dat102.modell.Datakontakt;
+import java.util.Iterator;
+import no.hib.dat102.mengde.adt.MengdeADT;
+import no.hib.dat102.mengde.kjedet.KjedetMengde;
+import no.hib.dat102.modell.Hobby;
 import no.hib.dat102.modell.Medlem;
+import java.util.Scanner;
+
+import no.hib.dat102.modell.Datakontakt;
 
 public class Testgrensesnitt {
-	
+	private static Scanner sc;
+
 	// leser opplysningene om et medlem fra tastatur
 	public static Medlem lesMedlem() {
-		//TODO
-		System.out.println("metode ikke implementert");
-		return null;
+		sc = new Scanner(System.in);
+
+		System.out.print("Navn: ");
+		String navn = sc.nextLine();
+
+		System.out.print("StatusIndex: ");
+		int index = sc.nextInt();
+
+		Medlem medlem = new Medlem(navn, index);
+		return medlem;
 	}
-	
 
 	// skriver ut hobbylisten for et medlem
 	public static void skrivHobbyListe(Medlem medlem) {
 		System.out.println("Alle hobbyene ");
-		System.out.println((medlem).getHobby().toString());
-		//TODO
+		MengdeADT<Hobby> hobby = medlem.getHobby();
+		Iterator<Hobby> teller = hobby.oppramser();
+
+		while (teller.hasNext()) {
+			System.out.println(teller.next().getHobbyNavn().toString());
+		}
+
 	}
 
 	/**
@@ -31,8 +49,23 @@ public class Testgrensesnitt {
 	 * @param arkiv
 	 */
 	public static void skrivParListe(Datakontakt arkiv) {
-		//TODO
-		System.out.println("Metode ikke implementert");
-	}
+		Medlem[] k = arkiv.getMedlemmer();
+		KjedetMengde<Integer> tall = new KjedetMengde<Integer>();
+		
+		int j = 0;
+		int teller = 0;
 
+		for (int i = 0; i < k.length; i++) {
+			while (k[i].getStatusIndeks() != -1) {
+				if (k[i] != null && arkiv.finnPartnerFor(k[i]) == k[i].getStatusIndeks()) {
+					tall.leggTil(arkiv.finnMedlemsIndeks(k[i]));
+					tall.leggTil(arkiv.finnMedlemsIndeks(k[i]));
+				}
+			}
+		}
+		System.out.println("Antall par funnet: " + teller);
+		for (int i = 0; i < tall.antall(); i++) {
+			System.out.println("PARNAVN HOBBYER " + k[i].getNavn() + " og " + k[i + 1].getNavn() + k[i].getHobby().toString());
+		}
+	}
 }
