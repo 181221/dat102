@@ -9,13 +9,13 @@ public class Medlem {
 	private int statusIndeks;
 
 	public Medlem() {
-		this("", -1);
+		this("",-1);
 	}
 
-	public Medlem(String navn, int statusIndeks) {
+	public Medlem(String navn, int index) {
 		this.navn = navn;
 		this.hobby = new KjedetMengde<Hobby>();
-		this.statusIndeks = statusIndeks;
+		this.statusIndeks = index;
 		
 	}
 
@@ -48,7 +48,7 @@ public class Medlem {
 	 */
 	@Override
 	public String toString() {
-		return "Medlem [navn=" + navn + ", hobby=" + hobby + ", statusIndeks=" + statusIndeks + "]";
+		return "Medlem: [" + navn + ", hobby: " + hobby + ", statusIndeks: " + statusIndeks + "]";
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class Medlem {
 	 * @param medlem2
 	 */
 	public boolean passerTil(Medlem medlem2) {
-		return hobby.erLik(medlem2.getHobby());
+		return this.hobby.erLik(medlem2.getHobby());
 	}
 
 }

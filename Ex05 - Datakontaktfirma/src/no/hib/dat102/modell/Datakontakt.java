@@ -1,9 +1,13 @@
 package no.hib.dat102.modell;
 
 public class Datakontakt {
-	private Medlem[] medlemmer;
-	private int antallMedlemmer;
+	private static Medlem[] medlemmer;
+	private static int antallMedlemmer;
 	private static final int STDK = 100;
+
+	public Datakontakt() {
+		this(STDK);
+	}
 
 	/**
 	 * Oppretter en tabell med medlemmer
@@ -14,10 +18,6 @@ public class Datakontakt {
 	public Datakontakt(int antall) {
 		medlemmer = new Medlem[antall];
 		antallMedlemmer = 0;
-	}
-
-	public Datakontakt() {
-		this(STDK);
 	}
 
 	/**
@@ -74,14 +74,28 @@ public class Datakontakt {
 	 * 
 	 * @param medlemsnavn
 	 */
-	public int finnMedlemsIndeks(Medlem medlemsnavn) {
+	public static int finnMedlemsIndeks(Medlem medlemsnavn) {
 		int index = -1;
-		for(int i = 0; i < antallMedlemmer;i++){
-			if(medlemmer[i].getNavn().equals(medlemsnavn.getNavn())){
-				index = i;
+		boolean funnet = false;
+		for (int i = 0; i < antallMedlemmer && !funnet; i++) {
+		if (medlemmer[i] != null) {
+				if (medlemmer[i].equals(medlemsnavn)) {
+						index = i;
+						funnet = true;
+				}
 			}
 		}
 		return index;
+	}
+
+	public static Medlem finnMedlemsNavn(int statusIndex) {
+		Medlem k = null;
+		for (int i = 0; i < antallMedlemmer; i++) {
+			if (medlemmer[i] != null && medlemmer[i].getStatusIndeks() == statusIndex) {
+				k = medlemmer[i];
+			}
+		}
+		return k;
 	}
 
 	/**
@@ -97,11 +111,11 @@ public class Datakontakt {
 		int koblet = -1;
 		int medlemIndex = finnMedlemsIndeks(medlemsnavn);
 
-		for (int i = 0; i < antallMedlemmer && koblet == -1; i++) {
-			if (medlemmer[medlemIndex].passerTil(medlemmer[i])) {
+		for (int i = 0; i < antallMedlemmer; i++) {
+			if (medlemIndex != -1 && medlemmer[medlemIndex].passerTil(medlemmer[i])) {
 				medlemsnavn.setStatusIndeks(medlemIndex);
 				medlemmer[i].setStatusIndeks(medlemIndex);
-				koblet = i;
+				koblet = medlemIndex;
 			}
 		}
 		return koblet;
@@ -116,7 +130,8 @@ public class Datakontakt {
 	 */
 	public void tilbakestillStausIndeks(Medlem medlemsnavn) {
 
-		int personPar = finnPartnerFor(medlemsnavn); // to personer på returnere index
+		int personPar = finnPartnerFor(medlemsnavn); // to personer på returnere
+														// index
 		int medlemIndex = finnMedlemsIndeks(medlemsnavn);
 
 		if (personPar != -1 && medlemIndex != -1) {

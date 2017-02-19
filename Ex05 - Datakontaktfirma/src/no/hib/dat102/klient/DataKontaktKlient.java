@@ -12,7 +12,7 @@ import no.hib.dat102.utsyn.Testgrensesnitt;
 public class DataKontaktKlient {
 	public static void main(String[] args) {
 		Datakontakt tabell = new Datakontakt();
-		Testgrensesnitt lol = new Testgrensesnitt();
+		Testgrensesnitt lol = new Testgrensesnitt(tabell);
 		MengdeADT<Hobby> m1 = new KjedetMengde<Hobby>();
 		MengdeADT<Hobby> m2 = new KjedetMengde<Hobby>();
 

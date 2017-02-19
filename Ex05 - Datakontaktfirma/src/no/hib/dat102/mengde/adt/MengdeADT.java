@@ -2,6 +2,8 @@ package no.hib.dat102.mengde.adt;
 
 import java.util.Iterator;
 
+import no.hib.dat102.modell.Medlem;
+
 public interface MengdeADT<T> {
 	// Interface som definerer alle operasjoner i en ADT
 	// med navn MengdeADT (en datasamling, en høynivå datastruktur)
@@ -48,7 +50,8 @@ public interface MengdeADT<T> {
 	 * @return sann hvis elementet fins ellers usann
 	 */
 	boolean inneholder(T element);
-
+	
+	Medlem inneholder(String element);
 	/**
 	 * Tester om this-mengden og parameteren inneholder nøyaktig de samme
 	 * elementene

@@ -1,6 +1,8 @@
 package no.hib.dat102.mengde.tabell;
 
 import no.hib.dat102.mengde.adt.*;
+import no.hib.dat102.modell.Medlem;
+
 import java.util.Iterator;
 import java.util.Random;
 
@@ -192,6 +194,12 @@ public class TabellMengde<T> implements MengdeADT<T> {
 			}
 		}
 		return AikkeB;
+	}
+
+	@Override
+	public Medlem inneholder(String element) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }// class

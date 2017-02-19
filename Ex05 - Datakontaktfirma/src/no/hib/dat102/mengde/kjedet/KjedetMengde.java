@@ -1,12 +1,13 @@
 package no.hib.dat102.mengde.kjedet;
 
-import no.hib.dat102.mengde.adt.*;
-import no.hib.dat102.mengde.tabell.TabellMengde;
-
 //********************************************************************
 // Kjedet implementasjon av en mengde. 
 //********************************************************************
-import java.util.*;
+import java.util.Iterator;
+import java.util.Random;
+
+import no.hib.dat102.mengde.adt.MengdeADT;
+import no.hib.dat102.modell.Medlem;
 
 public class KjedetMengde<T> implements MengdeADT<T> {
 	private static Random rand = new Random();
@@ -135,6 +136,21 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 		return funnet;
 	}
 
+	public Medlem inneholder(String element) {
+		boolean funnet = false;
+		LinearNode<T> aktuell = start;
+		Medlem medlem = null;
+		for (int sok = 0; sok < antall && !funnet; sok++) {
+			if (aktuell.getElement().equals(element)) {
+				funnet = true;
+				medlem = (Medlem) aktuell.getElement();
+			} else {
+				aktuell = aktuell.getNeste();
+			}
+		}
+		return medlem;
+	}
+
 	@Override
 	public boolean erLik(MengdeADT<T> m2) {
 		if (this.antall != m2.antall()) {
@@ -218,8 +234,9 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 		}
 		return AikkeB;
 	}
+
 	/**
-	 * returnerer en streng 
+	 * returnerer en streng
 	 */
 	@Override
 	public String toString() {
