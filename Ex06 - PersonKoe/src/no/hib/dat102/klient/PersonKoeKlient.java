@@ -15,11 +15,12 @@ public class PersonKoeKlient {
 		koe.innKoe(p1);
 		koe.innKoe(p2);
 		koe.innKoe(p3);
-
-		System.out.println(koe.utKoe().toString());
-		System.out.println(koe.utKoe().toString());
-		System.out.println(koe.utKoe().toString());
-		System.out.println(koe.utKoe().toString());
+		
+		int antall = koe.antall();
+		for(int i = 0; i < antall; i++){
+			System.out.println(koe.utKoe().toString());
+		}
+		
 		if (koe.erTom()) {
 			System.out.println("ingen elementer i koen: ");
 		}

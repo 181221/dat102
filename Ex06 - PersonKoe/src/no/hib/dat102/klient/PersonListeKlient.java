@@ -22,7 +22,7 @@ public class PersonListeKlient {
 		int antall = liste.antall();
 
 		for (int i = 0; i < antall; i++) {
-			System.out.println(liste.fjern(liste.foerste()));
+			System.out.println(liste.fjernSiste());
 		}
 
 	}
