@@ -29,40 +29,6 @@ public class Balansering {
 		}
 	}
 
-	public void foretaBalansering(String innDataStreng, int linjenr) {
-		int lengde = innDataStreng.length();
-		boolean balansert = true;
-		int k = 0;
-		Parentesinfo T;
-		Character hallo;
-
-		while (k < lengde && balansert) {
-
-			hallo = innDataStreng.charAt(k);
-
-			if (hallo.equals(')') || hallo.equals('}') || hallo.equals(']')) {
-				T = stabel.pop();
-				System.out.print(T.getVenstreparentes());
-				// System.out.println(hallo);
-				System.out.println(innDataStreng.charAt(k));
-				if (!passer(T.getVenstreparentes(), innDataStreng.charAt(k))) {
-					System.out.println("Parentesfeil på linje.. " + T.getLinjenr() + " posisjon: " + T.getPosisjon());
-					balansert = false;
-				}
-			} else if (stabel.erTom()) {
-				// balansert = false;
-				System.out.println("filen er balansert");
-			}
-			System.out.println(balansert);
-			k++;
-		} // while
-
-		if (balansert) {
-			System.out.println("Ingen kompilator feil. Fil er balansert");
-		}
-
-	}//
-
 	public void lesFraFil(String filnavn) {
 		BufferedReader tekstLeser = null;
 		
