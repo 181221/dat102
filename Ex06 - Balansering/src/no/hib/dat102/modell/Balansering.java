@@ -10,24 +10,10 @@ import no.hib.dat102.KjedetStabel;
 public class Balansering {
 	private KjedetStabel<Parentesinfo> stabel;
 	Parentesinfo info;
-	
-	
-	
+
 	public Balansering() {
 		stabel = new KjedetStabel<Parentesinfo>();
 		info = new Parentesinfo();
-	}
-	private boolean erApent(char aapent){
-		switch (aapent) {
-		case '(':
-			return true;
-		case '[':
-			return true;
-		case '{':
-			return true;
-		default:
-			return false;
-		}
 	}
 
 	private boolean passer(char aapent, char lukket) {
@@ -41,95 +27,94 @@ public class Balansering {
 		default:
 			return false;
 		}
-	}//
-		// -----------------------------------------
-		//
-		// Balansering av uttrykk med parenteser {},(),[]
-		// } ] ) kalles lukkete symboler (høyre)
-		// { [ ( kalles for åpne symboler (venstre)
-		// ...{... [...(...)...]...}... lovlig (balansert) utrykk
-		// ...{...(...[...)...]...}... ulovlig (ikke balansert) uttrykk
-		// algoritme balansering
-		// Lag en tom stabel
-		// så lenge( ikke-slutt på strengen og fortsatt balansert){
-		// hvis symbolet er åpent
-		// stable det på
-		// ellers hvis symbolet er lukket
-		// hvis stabelen er tom
-		// sett fortsatt = usann, feilmelding
-		// ellers
-		// stable av symbol (åpent symbol)
-		// hvis det åpne symbolet ikke svarer til det sist leste
-		// lukkete symbolet
-		// sett fortsatt = usann, feilmelding
-		// }
-		// hvis stabelen er ikke-tom så feilmelding */
+	}
 
 	public void foretaBalansering(String innDataStreng, int linjenr) {
 		int lengde = innDataStreng.length();
 		boolean balansert = true;
-		KjedetStabel<Parentesinfo> test = new KjedetStabel<Parentesinfo>();
 		int k = 0;
+		Parentesinfo T;
+		Character hallo;
+
 		while (k < lengde && balansert) {
-			if (innDataStreng.contains(")")||innDataStreng.contains("}")||innDataStreng.contains("]")) {
-				Parentesinfo lol = new Parentesinfo(-1,k,innDataStreng.charAt(k));
-				test.push(lol);
-			}else if(stabel.erTom() ){
+
+			hallo = innDataStreng.charAt(k);
+
+			if (hallo.equals(')') || hallo.equals('}') || hallo.equals(']')) {
+				T = stabel.pop();
+				System.out.print(T.getVenstreparentes());
+				// System.out.println(hallo);
+				System.out.println(innDataStreng.charAt(k));
+				if (!passer(T.getVenstreparentes(), innDataStreng.charAt(k))) {
+					System.out.println("Parentesfeil på linje.. " + T.getLinjenr() + " posisjon: " + T.getPosisjon());
 					balansert = false;
-				}else{ 
-					Parentesinfo informasjon = stabel.pop();
-					if(!passer(test.pop().getVenstreparentes(),informasjon.getVenstreparentes())){
-						System.out.println("Parentes er ikke lukket på linje nr " + informasjon.getPosisjon());
-						balansert = false;
-					}
 				}
+			} else if (stabel.erTom()) {
+				// balansert = false;
+				System.out.println("filen er balansert");
 			}
-		
-		if(!stabel.erTom()){
-			System.out.println("feil");
-		}
-		if(balansert){
-			System.out.println("er balansert");
+			System.out.println(balansert);
+			k++;
+		} // while
+
+		if (balansert) {
+			System.out.println("Ingen kompilator feil. Fil er balansert");
 		}
 
 	}//
 
 	public void lesFraFil(String filnavn) {
-		FileReader tekstFilLeser = null;
+		BufferedReader tekstLeser = null;
+		
+		Parentesinfo T;
 		try {
-			tekstFilLeser = new FileReader(filnavn);
+			tekstLeser = new BufferedReader(new FileReader(filnavn));
 		} catch (FileNotFoundException unntak) {
-			System.out.println("Finner ike filen!");
+			System.out.println("Finner ikke filen!");
 			System.exit(-1);
 		}
-
-		BufferedReader tekstLeser = new BufferedReader(tekstFilLeser);
-		String linje = null;
 		try {
-			int linjenr = tekstLeser.read();
-			linje = tekstLeser.readLine();
-			while (linje != null) {
-				linje += tekstLeser.readLine();
-				linjenr++;
-				for(int i = 0; i < linje.length();i++){
-					if(linje.contains("(")||linje.contains("{")||linje.contains("[")){
-						Parentesinfo setning = new Parentesinfo(linjenr,i,linje.charAt(i));
+			int linjenr = 0;
+			boolean balansert = true;
+			for (String linjer = tekstLeser.readLine(); linjer != null && balansert; linjer = tekstLeser.readLine()) {
+				for (int i = 0; i < linjer.length(); i++) {
+					Character hallo = linjer.charAt(i);
+					if (hallo.equals('(') || hallo.equals('[') || hallo.equals('{')) {
+						Parentesinfo setning = new Parentesinfo(linjenr, i, linjer.charAt(i));
 						stabel.push(setning);
+					} else if ((hallo.equals(')') || hallo.equals(']') || hallo.equals('}'))) {
+						if (stabel.erTom()) {
+							balansert = false;
+							System.out.println("feil på Linje:" + (linjenr + 1) + " posisjon " + i);
+						} else {
+							T = stabel.pop();
+							if (!passer(T.getVenstreparentes(), hallo)) {
+								System.out.println("Par passer ikke " + "på linjenr " + (linjenr + 1) + " posisjon " + i);
+								balansert = false;
+							}
+						}
 					}
 				}
-			} // while
-			foretaBalansering(linje,0);
-		}
-
-		catch (IOException unntak) {
+				linjenr++;
+			} // for
+			if(!stabel.erTom()){
+				T = stabel.pop();
+				System.out.println("feilmelding: parentes ikke lukket på linje " + (linjenr+1) + " på posisjon " + (T.getPosisjon())  );
+				balansert = false;
+			}
+			if (balansert) {
+				System.out.println("filen er Balansert");
+			}
+		} catch (IOException unntak) {
 			System.out.println("Feil ved innlesing!");
 			System.exit(-1);
 		}
 		try {
-			tekstFilLeser.close();
+			tekstLeser.close();
 		} catch (IOException unntak) {
 			System.out.println("Feil ved lukking av fil!");
 		}
+		
 
 	}// metode
 
