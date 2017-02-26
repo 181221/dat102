@@ -31,7 +31,6 @@ public class Balansering {
 
 	public void lesFraFil(String filnavn) {
 		BufferedReader tekstLeser = null;
-		
 		Parentesinfo T;
 		try {
 			tekstLeser = new BufferedReader(new FileReader(filnavn));
