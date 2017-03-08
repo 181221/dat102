@@ -1,1 +1,9 @@
-()(())(
+public class Balansering {
+	private KjedetStabel<Parentesinfo> stabel;
+	Parentesinfo info;
+
+	public Balansering() {
+		stabel = new KjedetStabel<Parentesinfo>();
+		info = new Parentesinfo();
+	}
+}(

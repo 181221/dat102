@@ -60,7 +60,7 @@ public class Meny {
 			case 3:
 				System.out.println("Hobby navn: ");
 				String person = tast.next();
-				Medlem en = Testgrensesnitt.finnMedlem(person);
+				Medlem en = tekstgr.finnMedlem(person);
 				if (en != null){
 					Testgrensesnitt.skrivHobbyListe(en);
 					

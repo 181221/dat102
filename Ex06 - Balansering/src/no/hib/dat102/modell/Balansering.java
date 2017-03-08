@@ -37,6 +37,7 @@ public class Balansering {
 		} catch (FileNotFoundException unntak) {
 			System.out.println("Finner ikke filen!");
 			System.exit(-1);
+			
 		}
 		try {
 			int linjenr = 0;
@@ -64,7 +65,7 @@ public class Balansering {
 			} // for
 			if(!stabel.erTom()){
 				T = stabel.pop();
-				System.out.println("feilmelding: parentes ikke lukket på linje " + (linjenr+1) + " på posisjon " + (T.getPosisjon())  );
+				System.out.println("feilmelding: parentes ikke lukket på linje " + (linjenr) + " på posisjon " + (T.getPosisjon())  );
 				balansert = false;
 			}
 			if (balansert) {

@@ -1,26 +1,26 @@
 package no.hib.dat102.utsyn;
 
+
 import java.util.Iterator;
-import no.hib.dat102.mengde.adt.MengdeADT;
-import no.hib.dat102.mengde.kjedet.KjedetMengde;
-import no.hib.dat102.modell.Hobby;
-import no.hib.dat102.modell.Medlem;
-import no.hib.dat102.modell.Datakontakt;
 import java.util.Scanner;
 
+import no.hib.dat102.mengde.adt.MengdeADT;
+import no.hib.dat102.mengde.kjedet.KjedetMengde;
 import no.hib.dat102.modell.Datakontakt;
+import no.hib.dat102.modell.Hobby;
+import no.hib.dat102.modell.Medlem;
 
 public class Testgrensesnitt {
 	private static Scanner sc;
-	private static int valg;
-	private static Datakontakt tab;
+	private int valg;
+	private Datakontakt tab;
 	private static MengdeADT<Hobby> cda;
 	private static MengdeADT<Medlem> pers;
 
 	public Testgrensesnitt(Datakontakt tab) {
 		sc = new Scanner(System.in);
 		this.tab = tab;
-		pers = new KjedetMengde();
+		pers = new KjedetMengde<Medlem>();
 	}
 
 	// leser opplysningene om et medlem fra tastatur
@@ -56,17 +56,10 @@ public class Testgrensesnitt {
 
 	// skriver ut hobbylisten for et medlem
 	public static void skrivHobbyListe(Medlem medlem) {
-		System.out.println("Alle hobbyene ");
-		MengdeADT<Hobby> hobby = medlem.getHobby();
-		Iterator<Hobby> teller = hobby.oppramser();
-
-		while (teller.hasNext()) {
-			System.out.println(teller.next().getHobbyNavn().toString());
+		System.out.println(medlem.getHobby().toString());
 		}
 
-	}
-
-	public static Medlem finnMedlem(String medlem) {
+	public Medlem finnMedlem(String medlem) {
 		Medlem k = null;
 		boolean funnet = false;
 		if (!tab.erTom()) {
@@ -84,7 +77,7 @@ public class Testgrensesnitt {
 		return k;
 	}
 
-	public static MengdeADT<Medlem> LeggTilMedlemmerMedLikStatusIndex() {
+	public MengdeADT<Medlem> LeggTilMedlemmerMedLikStatusIndex() {
 		Medlem[] k = tab.getMedlemmer();
 		boolean par = false;
 		int lengden = k.length - 1;
