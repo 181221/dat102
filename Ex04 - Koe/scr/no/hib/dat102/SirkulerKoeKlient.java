@@ -9,9 +9,9 @@ public class SirkulerKoeKlient {
 
 		String streng = "Denne koen er en FIFO datastruktur";
 		int lengde = streng.length();
-
+		
 		System.out.println(streng);
-
+		
 		for (int i = 0; i < lengde; i++) {
 			tegnKoe.innKoe(new Character(streng.charAt(i)));
 		}
