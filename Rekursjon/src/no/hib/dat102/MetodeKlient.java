@@ -8,7 +8,7 @@ public class MetodeKlient {
 	//	System.out.println(Metoder.sumOpp(3,5));
 		System.out.println(Metoder.sum(2,3));
 		
-		
+		//TESTER TESTER
 		
 //		Metoder.snuTabell(tab, 0, 5);
 //		for(int i : tab){
