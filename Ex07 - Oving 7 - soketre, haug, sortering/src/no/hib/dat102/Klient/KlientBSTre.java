@@ -2,7 +2,8 @@ package no.hib.dat102.Klient;
 
 import java.util.Random;
 
-import no.hib.dat102.KjedetBinærSøkeTre;
+import no.hib.dat102.KjedetBinærSokeTre;
+
 
 class KlientBSTre {
 	public static void main(String[] a) {
@@ -14,7 +15,7 @@ class KlientBSTre {
 		final int ANTALL_NODER = 16;
 		Random tilfeldig = new Random();
 
-		KjedetBinærSøkeTre<Integer> bs = new KjedetBinærSøkeTre<Integer>();
+		KjedetBinærSokeTre<Integer> bs = new KjedetBinærSokeTre<Integer>();
 		Integer resultat = null;
 
 		for (int i = 0; i < ANTALL_NODER; i++) {
@@ -71,6 +72,13 @@ class KlientBSTre {
 			System.out.println("Treet er tomt");
 
 		// ****************************************************************************
+		
+		
+		
+		System.out.println("\nHoyden i treet er: " + bs.finnHoyde());
+		System.out.println("Antall: " + bs.antall());
+		System.out.println("Treet er nå: ");
+		bs.visInorden();
 
 	}
 }// class

@@ -39,6 +39,8 @@ public interface BSTreADT<T extends Comparable<T>> extends Iterable<T> {
    // public T fjern( T element);
     // Ikke impelmentert
    
+  
+   
    
    /*******************************************************************
     Returnerer en inordeniterator. 

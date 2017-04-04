@@ -9,7 +9,7 @@ import java.util.Iterator;
 import no.hib.dat102.ADT.BSTreADT;
 import no.hib.dat102.node.BinaerTreNode;
 
-public class KjedetBinærSøkeTre<T extends Comparable<T>> implements BSTreADT<T>, Iterable<T> {
+public class KjedetBinærSokeTre<T extends Comparable<T>> implements BSTreADT<T>, Iterable<T> {
 
 	private int antall;
 	private BinaerTreNode<T> rot;
@@ -17,18 +17,18 @@ public class KjedetBinærSøkeTre<T extends Comparable<T>> implements BSTreADT<T>,
 	/******************************************************************
 	 * Oppretter et tomt binært søketre.
 	 ******************************************************************/
-	public KjedetBinærSøkeTre() {
+	public KjedetBinærSokeTre() {
 		antall = 0;
 		rot = null;
 	}
 
 	/******************************************************************
-     Oppretter et binært søketre med en node..
-   ******************************************************************/
-   public KjedetBinærSøkeTre (T element) {
-      antall = 1;
-      rot    = new BinaerTreNode<T> (element);
-   }
+	 * Oppretter et binært søketre med en node..
+	 ******************************************************************/
+	public KjedetBinærSokeTre(T element) {
+		antall = 1;
+		rot = new BinaerTreNode<T>(element);
+	}
 
 	/*****************************************************************
 	 * Returnerer sann hvis dette binære trett er tomt og usann ellers.
@@ -42,6 +42,33 @@ public class KjedetBinærSøkeTre<T extends Comparable<T>> implements BSTreADT<T>,
 	 *****************************************************************/
 	public boolean erTom() {
 		return (antall == 0);
+	}
+
+	/*****************************************************************
+	 * Returnerer høyden i en treet.
+	 *****************************************************************/
+	
+	public int finnHoyde() {
+		int resultat = -1;
+		if (!erTom()) {
+			resultat = hoydeRek(rot);
+		}
+		return resultat;
+	}
+
+	private int hoydeRek(BinaerTreNode<T> p) {
+		int resultat = 0;
+		if (p != null) {
+			int venstreHoyde = hoydeRek(p.getVenstre());
+			int hoyreHoyde = hoydeRek(p.getHoyre());
+			if (venstreHoyde > hoyreHoyde) {
+				resultat = 1 + venstreHoyde;
+			} else {
+				resultat = 1 + hoyreHoyde;
+			}
+		}
+
+		return resultat;
 	}
 
 	/**********************************************************************

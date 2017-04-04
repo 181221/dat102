@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class KjedetBinaerSokeTreADTTest {   
 
-    private KjedetBinærSøkeTre<Integer> bs;  
+    private KjedetBinærSokeTre<Integer> bs;  
     // Testdata som legges inn i treet
     private Integer e0 = 1;
     private Integer e1 = 2;
@@ -28,7 +28,7 @@ public class KjedetBinaerSokeTreADTTest {
      */
     @Before
     public final void setup() throws Exception {
-      bs = new KjedetBinærSøkeTre<Integer>();
+      bs = new KjedetBinærSokeTre<Integer>();
     }
            
     /**
