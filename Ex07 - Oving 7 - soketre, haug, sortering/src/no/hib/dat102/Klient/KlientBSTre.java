@@ -78,7 +78,8 @@ class KlientBSTre {
 		System.out.println("\nHoyden i treet er: " + bs.finnHoyde());
 		System.out.println("Antall: " + bs.antall());
 		System.out.println("Treet er nå: ");
-		bs.visInorden();
+		//bs.visInorden();
+		bs.visPreorden();
 
 	}
 }// class
