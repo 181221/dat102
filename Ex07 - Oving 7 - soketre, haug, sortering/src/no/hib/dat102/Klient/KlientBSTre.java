@@ -2,7 +2,8 @@ package no.hib.dat102.Klient;
 
 import java.util.Random;
 
-import no.hib.dat102.KjedetBinærSokeTre;
+import no.hib.dat102.KjedetBinearSokeTre;
+
 
 
 class KlientBSTre {
@@ -15,7 +16,7 @@ class KlientBSTre {
 		final int ANTALL_NODER = 16;
 		Random tilfeldig = new Random();
 
-		KjedetBinærSokeTre<Integer> bs = new KjedetBinærSokeTre<Integer>();
+		KjedetBinearSokeTre<Integer> bs = new KjedetBinearSokeTre<Integer>();
 		Integer resultat = null;
 
 		for (int i = 0; i < ANTALL_NODER; i++) {

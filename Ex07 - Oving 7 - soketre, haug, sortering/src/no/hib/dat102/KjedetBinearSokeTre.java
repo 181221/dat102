@@ -9,7 +9,7 @@ import java.util.Iterator;
 import no.hib.dat102.ADT.BSTreADT;
 import no.hib.dat102.node.BinaerTreNode;
 
-public class KjedetBinærSokeTre<T extends Comparable<T>> implements BSTreADT<T>, Iterable<T> {
+public class KjedetBinearSokeTre<T extends Comparable<T>> implements BSTreADT<T>, Iterable<T> {
 
 	private int antall;
 	private BinaerTreNode<T> rot;
@@ -17,7 +17,7 @@ public class KjedetBinærSokeTre<T extends Comparable<T>> implements BSTreADT<T>,
 	/******************************************************************
 	 * Oppretter et tomt binært søketre.
 	 ******************************************************************/
-	public KjedetBinærSokeTre() {
+	public KjedetBinearSokeTre() {
 		antall = 0;
 		rot = null;
 	}
@@ -25,7 +25,7 @@ public class KjedetBinærSokeTre<T extends Comparable<T>> implements BSTreADT<T>,
 	/******************************************************************
 	 * Oppretter et binært søketre med en node..
 	 ******************************************************************/
-	public KjedetBinærSokeTre(T element) {
+	public KjedetBinearSokeTre(T element) {
 		antall = 1;
 		rot = new BinaerTreNode<T>(element);
 	}
