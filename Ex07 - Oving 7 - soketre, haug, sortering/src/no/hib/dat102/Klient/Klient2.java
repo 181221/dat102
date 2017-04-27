@@ -7,7 +7,7 @@ import no.hib.dat102.KjedetBinearSokeTre;
 public class Klient2 {
 	
 	private static Random r;
-	private static final int ANTALL_NODER = 1024;
+	private static final int ANTALL_NODER = 4096;
 	private static final int ANTALL_TRE = 100;
 	
 	public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class Klient2 {
 		for (int i = 0; i < ANTALL_TRE; i++) {
 			bsTab[i] = new KjedetBinearSokeTre<Integer>();
 			for(int k = 0; k < ANTALL_NODER;k++){
-				Integer tilfeldigTall = new Integer(r.nextInt(10000));
+				Integer tilfeldigTall = new Integer(r.nextInt(100000));
 				bsTab[i].leggTil(tilfeldigTall);
 
 			}
